@@ -103,6 +103,15 @@ call <SID>AddAlternateExtensionMapping('mli',"ml")
 call <SID>AddAlternateExtensionMapping('aspx.cs', 'aspx')
 call <SID>AddAlternateExtensionMapping('aspx.vb', 'aspx')
 call <SID>AddAlternateExtensionMapping('aspx', 'aspx.cs,aspx.vb')
+" Mappings for ObjC[++]
+call <SID>AddAlternateExtensionMapping('h',"m,mm,M,MM")
+call <SID>AddAlternateExtensionMapping('H',"M,MM")
+call <SID>AddAlternateExtensionMapping('hpp',"m,mm")
+call <SID>AddAlternateExtensionMapping('HPP',"M,MM")
+call <SID>AddAlternateExtensionMapping('m',"h,hpp")
+call <SID>AddAlternateExtensionMapping('M',"H,HPP")
+call <SID>AddAlternateExtensionMapping('mm',"h,hpp")
+call <SID>AddAlternateExtensionMapping('MM',"H,HPP")
 
 " Setup default search path, unless the user has specified
 " a path in their [._]vimrc. 
