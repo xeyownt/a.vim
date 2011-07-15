@@ -70,11 +70,11 @@ endfunction
 
 
 " Add all the default extensions
-" Mappings for C and C++
-call <SID>AddAlternateExtensionMapping('h',"c,cpp,cxx,cc,CC")
-call <SID>AddAlternateExtensionMapping('H',"C,CPP,CXX,CC")
-call <SID>AddAlternateExtensionMapping('hpp',"cpp,c")
-call <SID>AddAlternateExtensionMapping('HPP',"CPP,C")
+" Mappings for C, C++ and ObjC[++]
+call <SID>AddAlternateExtensionMapping('h',"c,cpp,cxx,cc,CC,m,mm,M,MM")
+call <SID>AddAlternateExtensionMapping('H',"C,CPP,CXX,CC,M,MM")
+call <SID>AddAlternateExtensionMapping('hpp',"cpp,c,m,mm")
+call <SID>AddAlternateExtensionMapping('HPP',"CPP,C,M,MM")
 call <SID>AddAlternateExtensionMapping('c',"h")
 call <SID>AddAlternateExtensionMapping('C',"H")
 call <SID>AddAlternateExtensionMapping('cpp',"h,hpp")
@@ -83,6 +83,10 @@ call <SID>AddAlternateExtensionMapping('cc',"h")
 call <SID>AddAlternateExtensionMapping('CC',"H,h")
 call <SID>AddAlternateExtensionMapping('cxx',"h")
 call <SID>AddAlternateExtensionMapping('CXX',"H")
+call <SID>AddAlternateExtensionMapping('m',"h,hpp")
+call <SID>AddAlternateExtensionMapping('M',"H,HPP")
+call <SID>AddAlternateExtensionMapping('mm',"h,hpp")
+call <SID>AddAlternateExtensionMapping('MM',"H,HPP")
 " Mappings for PSL7
 call <SID>AddAlternateExtensionMapping('psl',"ph")
 call <SID>AddAlternateExtensionMapping('ph',"psl")
@@ -103,15 +107,6 @@ call <SID>AddAlternateExtensionMapping('mli',"ml")
 call <SID>AddAlternateExtensionMapping('aspx.cs', 'aspx')
 call <SID>AddAlternateExtensionMapping('aspx.vb', 'aspx')
 call <SID>AddAlternateExtensionMapping('aspx', 'aspx.cs,aspx.vb')
-" Mappings for ObjC[++]
-call <SID>AddAlternateExtensionMapping('h',"m,mm,M,MM")
-call <SID>AddAlternateExtensionMapping('H',"M,MM")
-call <SID>AddAlternateExtensionMapping('hpp',"m,mm")
-call <SID>AddAlternateExtensionMapping('HPP',"M,MM")
-call <SID>AddAlternateExtensionMapping('m',"h,hpp")
-call <SID>AddAlternateExtensionMapping('M',"H,HPP")
-call <SID>AddAlternateExtensionMapping('mm',"h,hpp")
-call <SID>AddAlternateExtensionMapping('MM',"H,HPP")
 
 " Setup default search path, unless the user has specified
 " a path in their [._]vimrc. 
