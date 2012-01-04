@@ -16,13 +16,13 @@
 " Soeren Sonnenburg)
 
 " Do not load a.vim if is has already been loaded.
-if exists("loaded_alternateFile")
+if exists("g:loaded_alternateFile")
     finish
 endif
 if (v:progname == "ex")
    finish
 endif
-let loaded_alternateFile = 1
+let g:loaded_alternateFile = 1
 
 let alternateExtensionsDict = {}
 
