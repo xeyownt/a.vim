@@ -739,6 +739,10 @@ function! <SID>FindOrCreateBuffer(fileName, doSplit, findSimilar)
   let splitType = a:doSplit[0]
   let bang = a:doSplit[1]
   if (bufNr == -1)
+     " If begining of path matches cwd, strip it
+     if FILENAME[0:len(getcwd())- 1] == getcwd()
+       let FILENAME = FILENAME[len(getcwd())+1:]
+     endif
      " Buffer did not exist....create it
      let v:errmsg=""
      if (splitType == "h")
