@@ -132,7 +132,9 @@ call <SID>AddAlternateExtensionMapping('js','coffee')
 " a path in their [._]vimrc.
 if (!exists('g:alternateSearchPath'))
   let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
-  let g:alternateSearchPath .= ',reg:/src/lib/,reg:|src/|,reg:#\v(lib|test)#src/\1#'
+  " removed from clvv fork; specify this after sourcing the script in your
+  " vimrc instead of doing it here.
+  "  let g:alternateSearchPath .= ',reg:/src/lib/,reg:|src/|,reg:#\v(lib|test)#src/\1#'
 endif
 
 " If this variable is true then a.vim will not alternate to a file/buffer which
