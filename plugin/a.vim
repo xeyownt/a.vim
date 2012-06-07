@@ -78,8 +78,8 @@ let s:cpp_lower = "cpp,CPP,cxx,CXX,cc,CC"
 let s:cpp_upper = "CPP,cpp,CXX,cxx,CC,cc"
 let s:h_lower = "h,H"
 let s:h_upper = "H,h"
-let s:hpp_lower = "hpp,HPP,".s:h_lower
-let s:hpp_upper = "HPP,hpp,".s:h_upper
+let s:hpp_lower = "hpp,HPP,hxx,HXX,".s:h_lower
+let s:hpp_upper = "HPP,hpp,HXX,hxx,".s:h_upper
 let s:cpp_c_lower = s:cpp_lower.",".s:c_lower
 let s:cpp_c_upper = s:cpp_upper.",".s:c_upper
 
