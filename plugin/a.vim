@@ -71,18 +71,30 @@ endfunction
 
 " Add all the default extensions
 " Mappings for C and C++
-call <SID>AddAlternateExtensionMapping('h',"c,cpp,cxx,cc,CC")
-call <SID>AddAlternateExtensionMapping('H',"C,CPP,CXX,CC")
-call <SID>AddAlternateExtensionMapping('hpp',"cpp,c")
-call <SID>AddAlternateExtensionMapping('HPP',"CPP,C")
-call <SID>AddAlternateExtensionMapping('c',"h")
-call <SID>AddAlternateExtensionMapping('C',"H")
-call <SID>AddAlternateExtensionMapping('cpp',"h,hpp")
-call <SID>AddAlternateExtensionMapping('CPP',"H,HPP")
-call <SID>AddAlternateExtensionMapping('cc',"h")
-call <SID>AddAlternateExtensionMapping('CC',"H,h")
-call <SID>AddAlternateExtensionMapping('cxx',"h")
-call <SID>AddAlternateExtensionMapping('CXX',"H")
+" - lower and upper versions to denote priority
+let s:c_lower = "c,C"
+let s:c_upper = "C,c" 
+let s:cpp_lower = "cpp,CPP,cxx,CXX,cc,CC"
+let s:cpp_upper = "CPP,cpp,CXX,cxx,CC,cc"
+let s:h_lower = "h,H"
+let s:h_upper = "H,h"
+let s:hpp_lower = "hpp,HPP,".s:h_lower
+let s:hpp_upper = "HPP,hpp,".s:h_upper
+let s:cpp_c_lower = s:cpp_lower.",".s:c_lower
+let s:cpp_c_upper = s:cpp_upper.",".s:c_upper
+
+call <SID>AddAlternateExtensionMapping('h',s:cpp_c_lower)
+call <SID>AddAlternateExtensionMapping('H',s:cpp_c_upper)
+call <SID>AddAlternateExtensionMapping('hpp',s:cpp_c_lower)
+call <SID>AddAlternateExtensionMapping('HPP',s:cpp_c_upper)
+call <SID>AddAlternateExtensionMapping('c',s:h_lower)
+call <SID>AddAlternateExtensionMapping('C',s:h_upper)
+call <SID>AddAlternateExtensionMapping('cpp',s:hpp_lower)
+call <SID>AddAlternateExtensionMapping('CPP',s:hpp_upper)
+call <SID>AddAlternateExtensionMapping('cc',s:hpp_lower)
+call <SID>AddAlternateExtensionMapping('CC',s:hpp_upper)
+call <SID>AddAlternateExtensionMapping('cxx',s:hpp_lower)
+call <SID>AddAlternateExtensionMapping('CXX',s:hpp_upper)
 " Mappings for PSL7
 call <SID>AddAlternateExtensionMapping('psl',"ph")
 call <SID>AddAlternateExtensionMapping('ph',"psl")
