@@ -128,7 +128,9 @@ call <SID>AddAlternateExtensionMapping('coffee','js')
 call <SID>AddAlternateExtensionMapping('js','coffee')
 " Cython
 call <SID>AddAlternateExtensionMapping('pxd','pyx')
+call <SID>AddAlternateExtensionMapping('PXD','PYX')
 call <SID>AddAlternateExtensionMapping('pyx','pxd')
+call <SID>AddAlternateExtensionMapping('PYX','PXD')
 
 
 " Setup default search path, unless the user has specified
