@@ -24,6 +24,17 @@ if (v:progname == "ex")
 endif
 let g:loaded_alternateFile = 1
 
+" If this is 0, if a buffer for the alternate file in the same directory as
+" the current file is not currently open, other buffers with the same basename
+" but different directories will be used.  This allows adaptability in the
+" event of an unusual file structure, provided that you have actually loaded
+" the alternate file already.  This may work as expected for some, but for
+" others this behavior may be undesired.
+"
+" To force matching to only work for alternates in the same folder and
+" alternates in g:alternateSearchPath, set this value to 1
+let g:strictAlternateMatching = 0
+
 let alternateExtensionsDict = {}
 
 " setup the default set of alternate extensions. The user can override in thier
@@ -711,7 +722,7 @@ endfunction
 " Args     : filename (IN) -- the name of the file
 "            doSplit (IN) -- indicates whether the window should be split
 "                            ("v", "h", "n", "v!", "h!", "n!", "t", "t!")
-"            findSimilar (IN) -- indicate weather existing buffers should be
+"            useExisting (IN) -- indicate weather existing buffers should be
 "                                prefered
 " Returns  : nothing
 " Author   : Michael Sharpe <feline@irendi.com>
@@ -722,13 +733,14 @@ endfunction
 "            Allow ! to be applied to buffer/split/editing commands for more
 "            vim/vi like consistency
 "            + implemented fix from Matt Perry
-function! <SID>FindOrCreateBuffer(fileName, doSplit, findSimilar)
+function! <SID>FindOrCreateBuffer(fileName, doSplit, useExisting)
   " Check to see if the buffer is already open before re-opening it.
   let FILENAME = escape(a:fileName, ' ')
   let bufNr = -1
   let lastBuffer = bufnr("$")
   let i = 1
-  if (a:findSimilar)
+  if (a:useExisting)
+     " find an existing buffer that actually matches the desired filename
      while i <= lastBuffer
        if <SID>EqualFilePaths(expand("#".i.":p"), a:fileName)
          let bufNr = i
@@ -737,7 +749,9 @@ function! <SID>FindOrCreateBuffer(fileName, doSplit, findSimilar)
        let i = i + 1
      endwhile
 
-     if (bufNr == -1)
+	 " otherwise, look for a buffer with the same basename (but, perhaps, a
+	 " different path)
+     if (g:strictAlternateMatching == 0  && bufNr == -1)
         let bufName = bufname(a:fileName)
         let bufFilename = fnamemodify(a:fileName,":t")
 
