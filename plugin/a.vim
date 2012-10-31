@@ -33,7 +33,9 @@ let g:loaded_alternateFile = 1
 "
 " To force matching to only work for alternates in the same folder and
 " alternates in g:alternateSearchPath, set this value to 1
-let g:strictAlternateMatching = 0
+if (!exists('g:strictAlternateMatching'))
+	let g:strictAlternateMatching = 0
+endif
 
 let alternateExtensionsDict = {}
 
