@@ -43,9 +43,8 @@ let alternateExtensionsDict = {}
 " .vimrc if the defaults are not suitable. To override in a .vimrc simply set a
 " g:alternateExtensions_<EXT> variable to a comma separated list of alternates,
 " where <EXT> is the extension to map.
-" E.g. let g:alternateExtensions_CPP = "inc,h,H,HPP,hpp"
-"      let g:alternateExtensions_{'aspx.cs'} = "aspx"
-
+" E.g. let g:alternateExtensions_filetype_CPP = "inc,h,H,HPP,hpp"
+"      let g:alternateExtensions_filetype_{'aspx.cs'} = "aspx"
 
 " This variable will be increased when an extension with greater number of dots
 " is added by the AddAlternateExtensionMapping call.
@@ -58,93 +57,66 @@ let s:maxDotsInExtension = 1
 "            alternates -- comma separated list of alternates extensions
 " Returns  : nothing
 " Author   : Michael Sharpe <feline@irendi.com>
-function! <SID>AddAlternateExtensionMapping(extension, alternates)
-   " This code does not actually work for variables like foo{'a.b.c.d.e'}
-   "let varName = "g:alternateExtensions_" . a:extension
-   "if (!exists(varName))
-   "   let g:alternateExtensions_{a:extension} = a:alternates
-   "endif
-
-   " This code handles extensions which contains a dot. exists() fails with
-   " such names.
-   "let v:errmsg = ""
-   " FIXME this line causes ex to return 1 instead of 0 for some reason??
-   "silent! echo g:alternateExtensions_{a:extension}
-   "if (v:errmsg != "")
-      "let g:alternateExtensions_{a:extension} = a:alternates
-   "endif
-
-   let g:alternateExtensionsDict[a:extension] = a:alternates
+function! <SID>AddAlternateExtensionMapping(filetype, extension, alternates)
+   if (!has_key(g:alternateExtensionsDict, a:filetype))
+     let g:alternateExtensionsDict[a:filetype] = {}
+   endif
+   let g:alternateExtensionsDict[a:filetype][a:extension] = a:alternates
    let dotsNumber = strlen(substitute(a:extension, "[^.]", "", "g"))
    if s:maxDotsInExtension < dotsNumber
      let s:maxDotsInExtension = dotsNumber
    endif
 endfunction
 
+function! <SID>AddAlternateExtensionMappingLowerAndUpper(filetype, extension_a, extension_b)
+  call <SID>AddAlternateExtensionMapping(a:filetype, tolower(a:extension_a), tolower(a:extension_b))
+  call <SID>AddAlternateExtensionMapping(a:filetype, toupper(a:extension_a), toupper(a:extension_b))
+endfunction
 
 " Add all the default extensions
-" Mappings for C, C++ and ObjC[++]
-" - lower and upper versions to denote priority
-let s:c_lower = "c,C"
-let s:c_upper = "C,c"
-let s:cpp_lower = "cpp,CPP,cxx,CXX,cc,CC"
-let s:cpp_upper = "CPP,cpp,CXX,cxx,CC,cc"
-let s:h_lower = "h,H"
-let s:h_upper = "H,h"
-let s:objc_upper = "M,m,MM,mm"
-let s:objc_lower = "m,M,mm,MM"
-let s:hpp_lower = "hpp,HPP,hxx,HXX,".s:h_lower
-let s:hpp_upper = "HPP,hpp,HXX,hxx,".s:h_upper
-let s:cpp_c_lower = s:cpp_lower.",".s:c_lower
-let s:cpp_c_upper = s:cpp_upper.",".s:c_upper
-let s:cpp_c_objc_lower = s:cpp_c_lower.",".s:objc_lower
-let s:cpp_c_objc_upper = s:cpp_c_upper.",".s:objc_upper
-
-call <SID>AddAlternateExtensionMapping('h',s:cpp_c_objc_lower)
-call <SID>AddAlternateExtensionMapping('H',s:cpp_c_objc_upper)
-call <SID>AddAlternateExtensionMapping('hpp',s:cpp_c_objc_lower)
-call <SID>AddAlternateExtensionMapping('HPP',s:cpp_c_objc_upper)
-call <SID>AddAlternateExtensionMapping('c',s:h_lower)
-call <SID>AddAlternateExtensionMapping('C',s:h_upper)
-call <SID>AddAlternateExtensionMapping('cpp',s:hpp_lower)
-call <SID>AddAlternateExtensionMapping('CPP',s:hpp_upper)
-call <SID>AddAlternateExtensionMapping('cc',s:hpp_lower)
-call <SID>AddAlternateExtensionMapping('CC',s:hpp_upper)
-call <SID>AddAlternateExtensionMapping('cxx',s:hpp_lower)
-call <SID>AddAlternateExtensionMapping('CXX',s:hpp_upper)
-call <SID>AddAlternateExtensionMapping('m',s:hpp_lower)
-call <SID>AddAlternateExtensionMapping('M',s:hpp_upper)
-call <SID>AddAlternateExtensionMapping('mm',s:hpp_lower)
-call <SID>AddAlternateExtensionMapping('MM',s:hpp_upper)
+" Mappings for C
+call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'c', 'h')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'h', 'h')
+" Mappings for C++
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'h',   'cpp,cc,cxx,c') " .c - for new .h files
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cpp', 'h,hpp'       )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cxx', 'h,hxx'       )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hpp', 'cpp'         )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hh',  'cc'          )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cc',  'hh,h'        )
+" Mappings for OBJ-C and OBJ-C++
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'm',  'h'   )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','mm', 'h'   )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'h',  'm'   )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','h',  'mm,m')
 " Mappings for PSL7
-call <SID>AddAlternateExtensionMapping('psl',"ph")
-call <SID>AddAlternateExtensionMapping('ph',"psl")
+" call <SID>AddAlternateExtensionMapping('psl',"ph")
+" call <SID>AddAlternateExtensionMapping('ph',"psl")
 " Mappings for ADA
-call <SID>AddAlternateExtensionMapping('adb',"ads")
-call <SID>AddAlternateExtensionMapping('ads',"adb")
+" call <SID>AddAlternateExtensionMapping('adb',"ads")
+" call <SID>AddAlternateExtensionMapping('ads',"adb")
 " Mappings for lex and yacc files
-call <SID>AddAlternateExtensionMapping('l',"y,yacc,ypp")
-call <SID>AddAlternateExtensionMapping('lex',"yacc,y,ypp")
-call <SID>AddAlternateExtensionMapping('lpp',"ypp,y,yacc")
-call <SID>AddAlternateExtensionMapping('y',"l,lex,lpp")
-call <SID>AddAlternateExtensionMapping('yacc',"lex,l,lpp")
-call <SID>AddAlternateExtensionMapping('ypp',"lpp,l,lex")
+" call <SID>AddAlternateExtensionMapping('l',"y,yacc,ypp")
+" call <SID>AddAlternateExtensionMapping('lex',"yacc,y,ypp")
+" call <SID>AddAlternateExtensionMapping('lpp',"ypp,y,yacc")
+" call <SID>AddAlternateExtensionMapping('y',"l,lex,lpp")
+" call <SID>AddAlternateExtensionMapping('yacc',"lex,l,lpp")
+" call <SID>AddAlternateExtensionMapping('ypp',"lpp,l,lex")
 " Mappings for OCaml
-call <SID>AddAlternateExtensionMapping('ml',"mli")
-call <SID>AddAlternateExtensionMapping('mli',"ml")
+" call <SID>AddAlternateExtensionMapping('ml',"mli")
+" call <SID>AddAlternateExtensionMapping('mli',"ml")
 " ASP stuff
-call <SID>AddAlternateExtensionMapping('aspx.cs', 'aspx')
-call <SID>AddAlternateExtensionMapping('aspx.vb', 'aspx')
-call <SID>AddAlternateExtensionMapping('aspx', 'aspx.cs,aspx.vb')
+" call <SID>AddAlternateExtensionMapping('aspx.cs', 'aspx')
+" call <SID>AddAlternateExtensionMapping('aspx.vb', 'aspx')
+" call <SID>AddAlternateExtensionMapping('aspx', 'aspx.cs,aspx.vb')
 " Coffee script
-call <SID>AddAlternateExtensionMapping('coffee','js')
-call <SID>AddAlternateExtensionMapping('js','coffee')
+" call <SID>AddAlternateExtensionMapping('coffee','js')
+" call <SID>AddAlternateExtensionMapping('js','coffee')
 " Cython
-call <SID>AddAlternateExtensionMapping('pxd','pyx')
-call <SID>AddAlternateExtensionMapping('PXD','PYX')
-call <SID>AddAlternateExtensionMapping('pyx','pxd')
-call <SID>AddAlternateExtensionMapping('PYX','PXD')
-
+" call <SID>AddAlternateExtensionMapping('pxd','pyx')
+" call <SID>AddAlternateExtensionMapping('PXD','PYX')
+" call <SID>AddAlternateExtensionMapping('pyx','pxd')
+" call <SID>AddAlternateExtensionMapping('PYX','PXD')
 
 " Setup default search path, unless the user has specified
 " a path in their [._]vimrc.
@@ -349,16 +321,20 @@ endfunction
 " Returns  : comma separated list of files with extensions
 " Author   : Michael Sharpe <feline@irendi.com>
 function! EnumerateFilesByExtension(path, baseName, extension)
+   if (!has_key(g:alternateExtensionsDict, &filetype))
+     return ""
+   endif
+
    let enumeration = ""
    let extSpec = ""
    let v:errmsg = ""
-   silent! echo g:alternateExtensions_{a:extension}
+   silent! echo g:alternateExtensions_{&filetype}_{a:extension}
    if (v:errmsg == "")
-      let extSpec = g:alternateExtensions_{a:extension}
+      let extSpec = g:alternateExtensions_{&filetype}_{a:extension}
    endif
    if (extSpec == "")
-      if (has_key(g:alternateExtensionsDict, a:extension))
-         let extSpec = g:alternateExtensionsDict[a:extension]
+      if (has_key(g:alternateExtensionsDict[&filetype], a:extension))
+         let extSpec = g:alternateExtensionsDict[&filetype][a:extension]
       endif
    endif
    if (extSpec != "")
@@ -446,16 +422,19 @@ endfunction
 "            variables echo the curly brace variable and look for an error
 "            message.
 function! DetermineExtension(path)
+  if (!has_key(g:alternateExtensionsDict, &filetype))
+    return ""
+  endif
   let mods = ":t"
   let i = 0
   while i <= s:maxDotsInExtension
     let mods = mods . ":e"
     let extension = fnamemodify(a:path, mods)
-    if (has_key(g:alternateExtensionsDict, extension))
+    if (has_key(g:alternateExtensionsDict[&filetype], extension))
        return extension
     endif
     let v:errmsg = ""
-    silent! echo g:alternateExtensions_{extension}
+    silent! echo g:alternateExtensions_{&filetype}_{extension}
     if (v:errmsg == "")
       return extension
     endif
