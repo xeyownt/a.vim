@@ -86,37 +86,21 @@ call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hh',  'cc'          
 call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cc',  'hh,h'        )
 " Mappings for OBJ-C and OBJ-C++
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'm',  'h'   )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','mm', 'h'   )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','mm', 'hh,h')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'h',  'm'   )
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','h',  'mm,m')
-" Mappings for PSL7
-" call <SID>AddAlternateExtensionMapping('psl',"ph")
-" call <SID>AddAlternateExtensionMapping('ph',"psl")
+" Mappings for PSL7 FIXME if need
+call <SID>AddAlternateExtensionMapping('psl', 'psl', 'ph')
+call <SID>AddAlternateExtensionMapping('psl', 'ph', 'psl')
 " Mappings for ADA
-" call <SID>AddAlternateExtensionMapping('adb',"ads")
-" call <SID>AddAlternateExtensionMapping('ads',"adb")
+call <SID>AddAlternateExtensionMapping('ada', 'adb', 'ads')
+call <SID>AddAlternateExtensionMapping('ada', 'ads', 'adb')
 " Mappings for lex and yacc files
-" call <SID>AddAlternateExtensionMapping('l',"y,yacc,ypp")
-" call <SID>AddAlternateExtensionMapping('lex',"yacc,y,ypp")
-" call <SID>AddAlternateExtensionMapping('lpp',"ypp,y,yacc")
-" call <SID>AddAlternateExtensionMapping('y',"l,lex,lpp")
-" call <SID>AddAlternateExtensionMapping('yacc',"lex,l,lpp")
-" call <SID>AddAlternateExtensionMapping('ypp',"lpp,l,lex")
+call <SID>AddAlternateExtensionMapping('lex',  'l', 'y')
+call <SID>AddAlternateExtensionMapping('yacc', 'y', 'l')
 " Mappings for OCaml
-" call <SID>AddAlternateExtensionMapping('ml',"mli")
-" call <SID>AddAlternateExtensionMapping('mli',"ml")
-" ASP stuff
-" call <SID>AddAlternateExtensionMapping('aspx.cs', 'aspx')
-" call <SID>AddAlternateExtensionMapping('aspx.vb', 'aspx')
-" call <SID>AddAlternateExtensionMapping('aspx', 'aspx.cs,aspx.vb')
-" Coffee script
-" call <SID>AddAlternateExtensionMapping('coffee','js')
-" call <SID>AddAlternateExtensionMapping('js','coffee')
-" Cython
-" call <SID>AddAlternateExtensionMapping('pxd','pyx')
-" call <SID>AddAlternateExtensionMapping('PXD','PYX')
-" call <SID>AddAlternateExtensionMapping('pyx','pxd')
-" call <SID>AddAlternateExtensionMapping('PYX','PXD')
+call <SID>AddAlternateExtensionMapping('ocaml', 'ml',  'mli')
+call <SID>AddAlternateExtensionMapping('ocaml', 'mli', 'ml')
 
 " Setup default search path, unless the user has specified
 " a path in their [._]vimrc.
