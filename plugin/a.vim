@@ -200,17 +200,7 @@ function! <SID>ExpandAlternatePath(pathSpec, sfPath)
       let path = a:sfPath . "/" . path
    endif
 
-"Transform relative path to absolute path
-python << endpython
-import vim,os
-
-path = vim.eval("path")
-path = os.path.abspath(path)
-vim.command("unlet path".format(path))
-vim.command("let path='{0}'".format(path))
-endpython
-
-   return path
+   return fnamemodify(path, ":p")
 endfunction
 
 " Function : FindFileInSearchPath (PRIVATE)
