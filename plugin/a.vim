@@ -133,30 +133,12 @@ endif
 "            n -- the extension to get
 " Returns  : the nth item (extension, path) from the list (extension
 "            spec), or "" for failure
-" Author   : Michael Sharpe <feline@irendi.com>
+" Author   : Alexander Prusov <alexprusov@gmail.com>
 " History  : Renamed from GetNthExtensionFromSpec to GetNthItemFromList
 "            to reflect a more generic use of this function. -- Bindu
 function! <SID>GetNthItemFromList(list, n)
-   let itemStart = 0
-   let itemEnd = -1
-   let pos = 0
-   let item = ""
-   let i = 0
-   while (i != a:n)
-      let itemStart = itemEnd + 1
-      let itemEnd = match(a:list, ",", itemStart)
-      let i = i + 1
-      if (itemEnd == -1)
-         if (i == a:n)
-            let itemEnd = strlen(a:list)
-         endif
-         break
-      endif
-   endwhile
-   if (itemEnd != -1)
-      let item = strpart(a:list, itemStart, itemEnd - itemStart)
-   endif
-   return item
+   let l:split_list = split(a:list, ',')
+   return get(l:split_list, a:n - 1, '')
 endfunction
 
 " Function : ExpandAlternatePath (PRIVATE)
