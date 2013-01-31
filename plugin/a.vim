@@ -89,9 +89,6 @@ call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'm',  'h'   )
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','mm', 'hh,h')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'h',  'm'   )
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','h',  'mm,m')
-" Mappings for PSL7 FIXME if need
-call <SID>AddAlternateExtensionMapping('psl', 'psl', 'ph')
-call <SID>AddAlternateExtensionMapping('psl', 'ph', 'psl')
 " Mappings for ADA
 call <SID>AddAlternateExtensionMapping('ada', 'adb', 'ads')
 call <SID>AddAlternateExtensionMapping('ada', 'ads', 'adb')
