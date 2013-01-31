@@ -203,38 +203,6 @@ function! <SID>ExpandAlternatePath(pathSpec, sfPath)
    return fnamemodify(path, ":p")
 endfunction
 
-" Function : FindFileInSearchPath (PRIVATE)
-" Purpose  : Searches for a file in the search path list
-" Args     : filename -- name of the file to search for
-"            pathList -- the path list to search
-"            relPathBase -- the path which relative paths are expanded from
-" Returns  : An expanded filename if found, the empty string otherwise
-" Author   : Michael Sharpe (feline@irendi.com)
-" History  : inline code written by Bindu Wavell originally
-function! <SID>FindFileInSearchPath(fileName, pathList, relPathBase)
-   let filepath = ""
-   let m = 1
-   let pathListLen = strlen(a:pathList)
-   if (pathListLen > 0)
-      while (1)
-         let pathSpec = <SID>GetNthItemFromList(a:pathList, m)
-         if (pathSpec != "")
-            let path = <SID>ExpandAlternatePath(pathSpec, a:relPathBase)
-            let fullname = path . "/" . a:fileName
-            let foundMatch = <SID>BufferOrFileExists(fullname)
-            if (foundMatch)
-               let filepath = fullname
-               break
-            endif
-         else
-            break
-         endif
-         let m = m + 1
-      endwhile
-   endif
-   return filepath
-endfunction
-
 " Function : FindFileInSearchPathEx (PRIVATE)
 " Purpose  : Searches for a file in the search path list
 " Args     : filename -- name of the file to search for
