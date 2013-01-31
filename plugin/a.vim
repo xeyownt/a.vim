@@ -41,10 +41,10 @@ let alternateExtensionsDict = {}
 
 " setup the default set of alternate extensions. The user can override in thier
 " .vimrc if the defaults are not suitable. To override in a .vimrc simply set a
-" g:alternateExtensions_<EXT> variable to a comma separated list of alternates,
+" g:alternateExtensions_<FILETYPE>_<EXT> variable to a comma separated list of alternates,
 " where <EXT> is the extension to map.
-" E.g. let g:alternateExtensions_filetype_CPP = "inc,h,H,HPP,hpp"
-"      let g:alternateExtensions_filetype_{'aspx.cs'} = "aspx"
+" E.g. let g:alternateExtensions_cpp_CPP = "inc,h,H,HPP,hpp"
+"      let g:alternateExtensions_aspx_{'aspx.cs'} = "aspx"
 
 " This variable will be increased when an extension with greater number of dots
 " is added by the AddAlternateExtensionMapping call.
