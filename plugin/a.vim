@@ -106,7 +106,6 @@ call <SID>AddAlternateExtensionMapping('ocaml', 'mli', 'ml')
 " a path in their [._]vimrc.
 if (!exists('g:alternateSearchPath'))
   let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
-  " removed from clvv fork; specify this after sourcing the script in your
   " vimrc instead of doing it here.
   "  let g:alternateSearchPath .= ',reg:/src/lib/,reg:|src/|,reg:#\v(lib|test)#src/\1#'
 endif
