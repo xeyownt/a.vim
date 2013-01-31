@@ -121,7 +121,7 @@ endif
 if (!exists('g:alternateRelativeFiles'))
    " by default a.vim will not convert the filename to one relative to the
    " current working directory
-   let g:alternateRelativeFiles = 0
+   let g:alternateRelativeFiles = 1
 endif
 
 
@@ -200,7 +200,7 @@ function! <SID>ExpandAlternatePath(pathSpec, sfPath)
       let path = a:sfPath . "/" . path
    endif
 
-   return fnamemodify(path, ":p")
+   return path
 endfunction
 
 " Function : FindFileInSearchPathEx (PRIVATE)
@@ -211,7 +211,8 @@ endfunction
 "            count -- find the count'th occurence of the file on the path
 " Returns  : An expanded filename if found, the empty string otherwise
 " Author   : Michael Sharpe (feline@irendi.com)
-" History  : Based on <SID>FindFileInSearchPath() but with extensions
+" History  : Based on <SID>FindFileInSearchPath() but with extensions (see in
+" git log)
 function! <SID>FindFileInSearchPathEx(fileName, pathList, relPathBase, count)
    let filepath = ""
    let m = 1
