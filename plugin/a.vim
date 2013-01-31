@@ -640,8 +640,9 @@ function! <SID>BufferOrFileExists(fileName)
       let bufName = fnamemodify(a:fileName,":t")
       let memBufName = bufname(bufName)
       if (memBufName != "")
-         let memBufBasename = fnamemodify(memBufName, ":t")
-         if (bufName == memBufBasename)
+         let bufNameFull = fnamemodify(a:fileName, ":p")
+         let memBufFull = fnamemodify(memBufName, ":p")
+         if (bufNameFull == memBufFull)
             let result = 2
          endif
       endif
