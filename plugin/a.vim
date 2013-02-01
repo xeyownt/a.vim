@@ -393,21 +393,15 @@ function! AlternateFile(splitWindow, ...)
 
      if (allfiles != "")
         let bestFile = ""
-        let bestScore = 0
-        let score = 0
-        let n = 1
+        let bestScore = -1
 
-        let onefile = <SID>GetNthItemFromList(allfiles, n)
-        let bestFile = onefile
-        while (onefile != "")
+        for onefile in split(allfiles, ',')
            let score = <SID>BufferOrFileExists(onefile)
            if (score > bestScore)
               let bestScore = score
               let bestFile = onefile
            endif
-           let n = n + 1
-           let onefile = <SID>GetNthItemFromList(allfiles, n)
-        endwhile
+        endfor
 
         if (bestScore == 0 && g:alternateNoDefaultAlternate == 1)
            echo "No existing alternate available"
