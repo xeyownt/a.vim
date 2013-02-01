@@ -215,23 +215,16 @@ endfunction
 " git log)
 function! <SID>FindFileInSearchPathEx(fileName, pathList, relPathBase, count)
    let filepath = ""
-   let m = 1
    let spath = ""
    let pathListLen = strlen(a:pathList)
    if (pathListLen > 0)
-      while (1)
-         let pathSpec = <SID>GetNthItemFromList(a:pathList, m)
-         if (pathSpec != "")
-            let path = <SID>ExpandAlternatePath(pathSpec, a:relPathBase)
-            if (spath != "")
-               let spath = spath . ','
-            endif
-            let spath = spath . path
-         else
-            break
-         endif
-         let m = m + 1
-      endwhile
+      for pathSpec in split(a:pathList, ',')
+          let path = <SID>ExpandAlternatePath(pathSpec, a:relPathBase)
+          if (spath != "")
+             let spath = spath . ','
+          endif
+          let spath = spath . path
+      endfor
    endif
 
    if (&path != "")
@@ -270,26 +263,18 @@ function! EnumerateFilesByExtension(path, baseName, extension)
       endif
    endif
    if (extSpec != "")
-      let n = 1
-      let done = 0
-      while (!done)
-         let ext = <SID>GetNthItemFromList(extSpec, n)
-         if (ext != "")
-            if (a:path != "")
-               let newFilename = a:path . "/" . a:baseName . "." . ext
-            else
-               let newFilename =  a:baseName . "." . ext
-            endif
-            if (enumeration == "")
-               let enumeration = newFilename
-            else
-               let enumeration = enumeration . "," . newFilename
-            endif
-         else
-            let done = 1
-         endif
-         let n = n + 1
-      endwhile
+      for ext in split(extSpec, ',')
+          if (a:path != "")
+             let newFilename = a:path . "/" . a:baseName . "." . ext
+          else
+             let newFilename =  a:baseName . "." . ext
+          endif
+          if (enumeration == "")
+             let enumeration = newFilename
+          else
+             let enumeration = enumeration . "," . newFilename
+          endif
+      endfor
    endif
    return enumeration
 endfunction
@@ -307,24 +292,17 @@ endfunction
 function! EnumerateFilesByExtensionInPath(baseName, extension, pathList, relPathBase)
    let enumeration = ""
    let filepath = ""
-   let m = 1
    let pathListLen = strlen(a:pathList)
    if (pathListLen > 0)
-      while (1)
-         let pathSpec = <SID>GetNthItemFromList(a:pathList, m)
-         if (pathSpec != "")
-            let path = <SID>ExpandAlternatePath(pathSpec, a:relPathBase)
-            let pe = EnumerateFilesByExtension(path, a:baseName, a:extension)
-            if (enumeration == "")
-               let enumeration = pe
-            else
-               let enumeration = enumeration . "," . pe
-            endif
-         else
-            break
-         endif
-         let m = m + 1
-      endwhile
+      for pathSpec in split(a:pathList, ',')
+          let path = <SID>ExpandAlternatePath(pathSpec, a:relPathBase)
+          let pe = EnumerateFilesByExtension(path, a:baseName, a:extension)
+          if (enumeration == "")
+             let enumeration = pe
+          else
+             let enumeration = enumeration . "," . pe
+          endif
+      endfor
    endif
    return enumeration
 endfunction
@@ -421,7 +399,7 @@ function! AlternateFile(splitWindow, ...)
 
         let onefile = <SID>GetNthItemFromList(allfiles, n)
         let bestFile = onefile
-        while (onefile != "" && score < 2)
+        while (onefile != "")
            let score = <SID>BufferOrFileExists(onefile)
            if (score > bestScore)
               let bestScore = score
@@ -514,15 +492,6 @@ comm! -nargs=? -bang IHV call AlternateOpenFileUnderCursor("v<bang>", <f-args>)
 comm! -nargs=? -bang IHT call AlternateOpenFileUnderCursor("t<bang>", <f-args>)
 comm! -nargs=? -bang IHN call AlternateOpenNextFile("<bang>")
 
-"function! <SID>PrintList(theList)
-"   let n = 1
-"   let oneFile = <SID>GetNthItemFromList(a:theList, n)
-"   while (oneFile != "")
-"      let n = n + 1
-"      let oneFile = <SID>GetNthItemFromList(a:theList, n)
-"   endwhile
-"endfunction
-
 " Function : NextAlternate (PUBLIC)
 " Purpose  : Used to cycle through any other alternate file which existed on
 "            the search path.
@@ -599,7 +568,7 @@ function! <SID>BufferOrFileExists(fileName)
    let i = 1
    while i <= lastBuffer
      if <SID>EqualFilePaths(expand("#".i.":p"), a:fileName)
-       let result = 2
+       let result = 3
        break
      endif
      let i = i + 1
