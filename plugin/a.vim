@@ -103,6 +103,11 @@ call <SID>AddAlternateExtensionMapping('mli',"ml")
 call <SID>AddAlternateExtensionMapping('aspx.cs', 'aspx')
 call <SID>AddAlternateExtensionMapping('aspx.vb', 'aspx')
 call <SID>AddAlternateExtensionMapping('aspx', 'aspx.cs,aspx.vb')
+" Edifact
+call <SID>AddAlternateExtensionMapping('edi', "gsv")
+call <SID>AddAlternateExtensionMapping('sh', "gsv")
+call <SID>AddAlternateExtensionMapping('ply', "gsv")
+call <SID>AddAlternateExtensionMapping('gsv', "edi,sh,play")
 
 " Setup default search path, unless the user has specified
 " a path in their [._]vimrc. 
