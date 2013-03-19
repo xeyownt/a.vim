@@ -86,7 +86,7 @@ endfunction
 " Mappings for C, C++ and ObjC[++]
 " - lower and upper versions to denote priority
 let s:c_lower = "c,C"
-let s:c_upper = "C,c" 
+let s:c_upper = "C,c"
 let s:cpp_lower = "cpp,CPP,cxx,CXX,cc,CC"
 let s:cpp_upper = "CPP,cpp,CXX,cxx,CC,cc"
 let s:h_lower = "h,H"
@@ -144,6 +144,9 @@ call <SID>AddAlternateExtensionMapping('pxd','pyx')
 call <SID>AddAlternateExtensionMapping('PXD','PYX')
 call <SID>AddAlternateExtensionMapping('pyx','pxd')
 call <SID>AddAlternateExtensionMapping('PYX','PXD')
+" Smarty
+call <SID>AddAlternateExtensionMapping('php','tpl')
+call <SID>AddAlternateExtensionMapping('tpl','php')
 
 
 " Setup default search path, unless the user has specified
