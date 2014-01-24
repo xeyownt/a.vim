@@ -84,8 +84,8 @@ let s:hpp_lower = "hpp,HPP,hxx,HXX,".s:h_lower
 let s:hpp_upper = "HPP,hpp,HXX,hxx,".s:h_upper
 let s:cpp_c_lower = s:cpp_lower.",".s:c_lower
 let s:cpp_c_upper = s:cpp_upper.",".s:c_upper
-let s:cpp_c_objc_lower = s:cpp_c_lower.",".s:objc_lower
-let s:cpp_c_objc_upper = s:cpp_c_upper.",".s:objc_upper
+let s:cpp_c_objc_lower = s:cpp_c_lower.",".s:objc_lower.',cu'
+let s:cpp_c_objc_upper = s:cpp_c_upper.",".s:objc_upper.',cu'
 
 call <SID>AddAlternateExtensionMapping('h',s:cpp_c_objc_lower)
 call <SID>AddAlternateExtensionMapping('H',s:cpp_c_objc_upper)
@@ -103,6 +103,8 @@ call <SID>AddAlternateExtensionMapping('m',s:hpp_lower)
 call <SID>AddAlternateExtensionMapping('M',s:hpp_upper)
 call <SID>AddAlternateExtensionMapping('mm',s:hpp_lower)
 call <SID>AddAlternateExtensionMapping('MM',s:hpp_upper)
+" Mappings for CUDA
+call <SID>AddAlternateExtensionMapping('cu','h')
 " Mappings for PSL7
 call <SID>AddAlternateExtensionMapping('psl',"ph")
 call <SID>AddAlternateExtensionMapping('ph',"psl")
