@@ -83,6 +83,10 @@ call <SID>AddAlternateExtensionMapping('cc',"h")
 call <SID>AddAlternateExtensionMapping('CC',"H,h")
 call <SID>AddAlternateExtensionMapping('cxx',"h")
 call <SID>AddAlternateExtensionMapping('CXX',"H")
+" Mappings for Objective-c and Objective-C++
+call <SID>AddAlternateExtensionMapping('h','m,mm')
+call <SID>AddAlternateExtensionMapping('m','h')
+call <SID>AddAlternateExtensionMapping('mm','h')
 " Mappings for PSL7
 call <SID>AddAlternateExtensionMapping('psl',"ph")
 call <SID>AddAlternateExtensionMapping('ph',"psl")
