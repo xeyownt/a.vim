@@ -67,12 +67,6 @@ There are 4 commands provided by this plugin. They are
 In all cases if the corresponding alternate file is already loaded that buffer
 is preferred. That is this plugin will never load the same file twice.
 
-Some maps are also provided for the IH command (mainly for example purposes)
-<Leader>ih - switches to the file under the cursor using the :IHS command
-<Leader>is - switches to the source file of the header file under the cursor 
-             using the :IHS command and the :A command
-<leader>ihn - switches to the next match in the sequence.
-
 ==============================================================================
 4. Configuration                                            *alternate-config*
 
