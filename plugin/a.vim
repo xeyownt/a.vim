@@ -393,17 +393,9 @@ function! AlternateFile(splitWindow, ...)
   let extension   = DetermineExtension(expand("%:p"))
   let baseName    = substitute(expand("%:t"), "\." . extension . '$', "", "")
   let currentPath = expand("%:p:h")
-  if has('python')
-	  if expand('%:.') =~? 'test'
-	     let baseName = substitute(expand("%:t"), "_test.py" .$, "","")
-	     echo baseName
-	  else
-	     let baseName = baseName . "_test"
-	  endif
-  endif
 
   if (a:0 != 0)
-     let newFullname = currentPath . "/" .  baseName . "_test." . a:1
+     let newFullname = currentPath . "/" .  baseName . "." . a:1
      call <SID>FindOrCreateBuffer(newFullname, a:splitWindow, 0)
   else
      let allfiles = ""
