@@ -78,29 +78,42 @@ endfunction
 call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'c', 'h')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'h', 'h')
 " Mappings for C++
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'h',   'cpp,cc,cxx,c,mm,m')
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cpp', 'h,hpp'            )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cxx', 'h,hxx'            )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hpp', 'cpp'              )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hh',  'cc'               )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cc',  'hh,h'             )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'h', 'cpp,cc,cxx,c,mm,m')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cpp', 'h,hpp')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cxx', 'h,hxx')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hpp', 'cpp')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hh', 'cc')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cc', 'hh,h')
 " Mappings for OBJ-C and OBJ-C++
-call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'm',  'h'   )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','mm', 'hh,h')
-call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'h',  'm'   )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','h',  'mm,m')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'm', 'h'   )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp', 'mm', 'hh,h')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'h', 'm'   )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp', 'h', 'mm,m')
 " Mappings for PSL7
-call <SID>AddAlternateExtensionMapping('psl',"ph")
-call <SID>AddAlternateExtensionMapping('ph',"psl")
+call <SID>AddAlternateExtensionMappingLowerAndUpper('psl', 'psl', 'ph')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('ph', 'ph', 'psl')
 " Mappings for ADA
-call <SID>AddAlternateExtensionMapping('ada', 'adb', 'ads')
-call <SID>AddAlternateExtensionMapping('ada', 'ads', 'adb')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('ada', 'adb', 'ads')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('ada', 'ads', 'adb')
 " Mappings for lex and yacc files
-call <SID>AddAlternateExtensionMapping('lex',  'l', 'y')
-call <SID>AddAlternateExtensionMapping('yacc', 'y', 'l')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('lex',  'l', 'y')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('yacc', 'y', 'l')
 " Mappings for OCaml
-call <SID>AddAlternateExtensionMapping('ocaml', 'ml',  'mli')
-call <SID>AddAlternateExtensionMapping('ocaml', 'mli', 'ml')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('ocaml', 'ml', 'mli')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('ocaml', 'mli', 'ml')
+" ASP stuff
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cs', 'aspx.cs', 'aspx')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('vb', 'aspx.vb', 'aspx')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('aspx', 'aspx.cs,aspx.vb')
+" Coffee script
+call <SID>AddAlternateExtensionMappingLowerAndUpper('coffee', 'coffee', 'js')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('javascript', 'js', 'coffee')
+" Cython
+call <SID>AddAlternateExtensionMappingLowerAndUpper('pyrex', 'pxd', 'pyx')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('pyrex', 'pyx', 'pxd')
+" Smarty
+call <SID>AddAlternateExtensionMappingLowerAndUpper('php', 'php','tpl')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('smarty', 'tpl','php')
 
 " Setup default search path, unless the user has specified
 " a path in their [._]vimrc.
