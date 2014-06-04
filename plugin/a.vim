@@ -78,17 +78,20 @@ endfunction
 call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'c', 'h')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'h', 'h')
 " Mappings for C++
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'h',   'cpp,cc,cxx,c') " .c - for new .h files
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cpp', 'h,hpp'       )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cxx', 'h,hxx'       )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hpp', 'cpp'         )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hh',  'cc'          )
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cc',  'hh,h'        )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'h',   'cpp,cc,cxx,c,mm,m')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cpp', 'h,hpp'            )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cxx', 'h,hxx'            )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hpp', 'cpp'              )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hh',  'cc'               )
+call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cc',  'hh,h'             )
 " Mappings for OBJ-C and OBJ-C++
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'm',  'h'   )
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','mm', 'hh,h')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objc',  'h',  'm'   )
 call <SID>AddAlternateExtensionMappingLowerAndUpper('objcpp','h',  'mm,m')
+" Mappings for PSL7
+call <SID>AddAlternateExtensionMapping('psl',"ph")
+call <SID>AddAlternateExtensionMapping('ph',"psl")
 " Mappings for ADA
 call <SID>AddAlternateExtensionMapping('ada', 'adb', 'ads')
 call <SID>AddAlternateExtensionMapping('ada', 'ads', 'adb')
