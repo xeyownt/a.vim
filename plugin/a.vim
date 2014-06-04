@@ -104,7 +104,7 @@ call <SID>AddAlternateExtensionMappingLowerAndUpper('ocaml', 'mli', 'ml')
 " ASP stuff
 call <SID>AddAlternateExtensionMappingLowerAndUpper('cs', 'aspx.cs', 'aspx')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('vb', 'aspx.vb', 'aspx')
-call <SID>AddAlternateExtensionMappingLowerAndUpper('aspx', 'aspx.cs,aspx.vb')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('aspx', 'aspx', 'aspx.cs,aspx.vb')
 " Coffee script
 call <SID>AddAlternateExtensionMappingLowerAndUpper('coffee', 'coffee', 'js')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('javascript', 'js', 'coffee')
