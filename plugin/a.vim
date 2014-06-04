@@ -116,6 +116,11 @@ call <SID>AddAlternateExtensionMappingLowerAndUpper('pyrex', 'pyx', 'pxd')
 " Smarty
 call <SID>AddAlternateExtensionMappingLowerAndUpper('php', 'php','tpl')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('smarty', 'tpl','php')
+" Edifact
+call <SID>AddAlternateExtensionMappingLowerAndUpper('edifact', 'edi', 'gsv')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('sh', 'sh', 'gsv')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('ply', 'ply', 'gsv')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('gsv', 'gsv', 'edi,sh,play')
 
 " Setup default search path, unless the user has specified
 " a path in their [._]vimrc.
