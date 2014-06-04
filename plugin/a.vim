@@ -120,7 +120,7 @@ call <SID>AddAlternateExtensionMappingLowerAndUpper('smarty', 'tpl','php')
 " Setup default search path, unless the user has specified
 " a path in their [._]vimrc.
 if (!exists('g:alternateSearchPath'))
-  let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
+  let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,sfr:../tests'
   " vimrc instead of doing it here.
   "  let g:alternateSearchPath .= ',reg:/src/lib/,reg:|src/|,reg:#\v(lib|test)#src/\1#'
 endif
@@ -388,9 +388,17 @@ function! AlternateFile(splitWindow, ...)
   let extension   = DetermineExtension(expand("%:p"))
   let baseName    = substitute(expand("%:t"), "\." . extension . '$', "", "")
   let currentPath = expand("%:p:h")
+  if has('python')
+	  if expand('%:.') =~? 'test'
+	     let baseName = substitute(expand("%:t"), "_test.py" .$, "","")
+	     echo baseName
+	  else
+	     let baseName = baseName . "_test"
+	  endif
+  endif
 
   if (a:0 != 0)
-     let newFullname = currentPath . "/" .  baseName . "." . a:1
+     let newFullname = currentPath . "/" .  baseName . "_test." . a:1
      call <SID>FindOrCreateBuffer(newFullname, a:splitWindow, 0)
   else
      let allfiles = ""
