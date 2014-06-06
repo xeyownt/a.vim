@@ -72,18 +72,22 @@ function! <SID>AddAlternateExtensionMappingLowerAndUpper(filetype, extension_a, 
   call <SID>AddAlternateExtensionMapping(a:filetype, tolower(a:extension_a), tolower(a:extension_b))
   call <SID>AddAlternateExtensionMapping(a:filetype, toupper(a:extension_a), toupper(a:extension_b))
 endfunction
+function! <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes(filetype_a, filetype_b, extension_a, extension_b)
+  call <SID>AddAlternateExtensionMappingLowerAndUpper(a:filetype_a, tolower(a:extension_a), tolower(a:extension_b))
+  call <SID>AddAlternateExtensionMappingLowerAndUpper(a:filetype_b, tolower(a:extension_a), tolower(a:extension_b))
+endfunction
 
 " Add all the default extensions
 " Mappings for C
 call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'c', 'h')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'h', 'h')
 " Mappings for C++
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'h', 'cpp,cc,cxx,c,mm,m,cu')
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cpp', 'h,hpp')
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cxx', 'h,hxx')
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hpp', 'cpp')
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'hh', 'cc')
-call <SID>AddAlternateExtensionMappingLowerAndUpper('cpp', 'cc', 'hh,h')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'h', 'cpp,cc,cxx,c,mm,m,cu')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'cpp', 'h,hpp')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'cxx', 'h,hxx')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'hpp', 'cpp')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'hh', 'cc')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'cc', 'hh,h')
 " Mappings for Cuda
 call <SID>AddAlternateExtensionMappingLowerAndUpper('cuda', 'cu', 'h')
 " Mappings for OBJ-C and OBJ-C++
