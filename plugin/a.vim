@@ -81,6 +81,10 @@ endfunction
 " Mappings for C
 call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'c', 'h')
 call <SID>AddAlternateExtensionMappingLowerAndUpper('c', 'h', 'c')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('c',         'c', 'h')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('c',         'h', 'c')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('c.doxygen', 'c', 'h')
+call <SID>AddAlternateExtensionMappingLowerAndUpper('c.doxygen', 'h', 'c')
 " Mappings for C++
 call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'h', 'cpp,cc,cxx,c,mm,m,cu')
 call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'cpp', 'h,hpp')
@@ -88,6 +92,12 @@ call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'cxx
 call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'hpp', 'cpp')
 call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'hh', 'cc')
 call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp', 'cpp11', 'cc', 'hh,h')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp.doxygen', 'cpp11.doxygen', 'h', 'cpp,cc,cxx,c,mm,m,cu')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp.doxygen', 'cpp11.doxygen', 'cpp', 'h,hpp')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp.doxygen', 'cpp11.doxygen', 'cxx', 'h,hxx')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp.doxygen', 'cpp11.doxygen', 'hpp', 'cpp')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp.doxygen', 'cpp11.doxygen', 'hh', 'cc')
+call <SID>AddAlternateExtensionMappingLowerAndUpperTwoTypes('cpp.doxygen', 'cpp11.doxygen', 'cc', 'hh,h')
 " Mappings for Cuda
 call <SID>AddAlternateExtensionMappingLowerAndUpper('cuda', 'cu', 'h')
 " Mappings for OBJ-C and OBJ-C++
