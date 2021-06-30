@@ -739,43 +739,20 @@ function! <SID>FindOrCreateBuffer(fileName, doSplit, useExisting)
         execute "tabn ".tabNr
      endif
 
-     " Buffer was already open......check to see if it is in a window
-     let bufWindow = bufwinnr(bufNr)
-     if (bufWindow == -1)
-        " Buffer was not in a window so open one
-        let v:errmsg=""
-        if (splitType == "h")
-           silent! execute ":sbuffer".bang." " . FILENAME
-        elseif (splitType == "v")
-           silent! execute ":vert sbuffer " . FILENAME
-        elseif (splitType == "t")
-           silent! execute ":tab sbuffer " . FILENAME
-        else
-           silent! execute ":buffer".bang." " . FILENAME
-        endif
-        if (v:errmsg != "")
-           echo v:errmsg
-        endif
-     else
-        " Buffer is already in a window so switch to the window
-        execute bufWindow."wincmd w"
-        if (bufWindow != winnr())
-           " something wierd happened...open the buffer
-           let v:errmsg=""
-           if (splitType == "h")
-              silent! execute ":split".bang." " . FILENAME
-           elseif (splitType == "v")
-              silent! execute ":vsplit".bang." " . FILENAME
-           elseif (splitType == "t")
-              silent! execute ":tab split".bang." " . FILENAME
-           else
-              silent! execute ":e".bang." " . FILENAME
-           endif
-           if (v:errmsg != "")
-              echo v:errmsg
-           endif
-        endif
-     endif
+     " Buffer was already open......
+      let v:errmsg=""
+      if (splitType == "h")
+         silent! execute ":sbuffer".bang." " . FILENAME
+      elseif (splitType == "v")
+         silent! execute ":vert sbuffer " . FILENAME
+      elseif (splitType == "t")
+         silent! execute ":tab sbuffer " . FILENAME
+      else
+         silent! execute ":buffer".bang." " . FILENAME
+      endif
+      if (v:errmsg != "")
+         echo v:errmsg
+      endif
   endif
 endfunction
 
